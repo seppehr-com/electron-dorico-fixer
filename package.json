@@ -1,0 +1,32 @@
+{
+  "name": "electron-dorico-fixer",
+  "version": "1.0.0",
+  "description": "Fix MusicXML files using DoricoFixer",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-packager . DoricoFixer --platform=win32 --arch=x64 --icon=assets/icon.ico --overwrite",
+    "build-mac": "electron-packager . DoricoFixer --platform=darwin --arch=x64 --overwrite",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.example.doricofixer",
+    "productName": "Dorico Fixer",
+    "icon": "build/icon",
+    "win": {
+      "target": "nsis",
+      "asar": true
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": false
+    }
+  },
+  "devDependencies": {
+    "electron": "^29.0.0",
+    "electron-builder": "^26.0.12",
+    "electron-packager": "^17.1.2"
+  }
+}

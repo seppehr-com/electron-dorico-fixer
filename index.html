@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dorico Fixer</title>
+    <style>
+      * {
+        user-select: none;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f5f7fa;
+        margin: 0;
+        padding: 40px;
+        color: #333;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      #drop-area {
+        border: 2px dashed #888;
+        background-color: #fff;
+        padding: 30px;
+        text-align: center;
+        cursor: pointer;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        transition: border-color 0.3s ease, background-color 0.3s ease;
+      }
+
+      #drop-area:hover {
+        border-color: #666;
+        background-color: #f0f0f0;
+      }
+
+      .file-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #e0f7fa;
+        padding: 8px 12px;
+        border-radius: 6px;
+        margin: 6px 0;
+        border: 1px solid #b2ebf2;
+      }
+
+      .file-name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 80%;
+      }
+
+      .remove-btn {
+        background-color: #f44336;
+        border: none;
+        color: white;
+        padding: 4px 8px;
+        margin-left: 10px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      .remove-btn:hover {
+        background-color: #d32f2f;
+      }
+
+      input,
+      button {
+        font-size: 16px;
+        padding: 8px 12px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        outline: none;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      #output-path {
+        width: 70%;
+        background-color: #eee;
+        border: none;
+        padding-left: 10px;
+      }
+      #choose-output {
+        width: 10%;
+        box-sizing: border-box;
+        display: inline-block;
+        margin-left: 2%;
+      }
+
+      #file-list {
+        margin-top: 15px;
+      }
+
+      #options-container {
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #fefefe;
+      }
+
+      #options-header {
+        padding: 10px 15px;
+        font-weight: bold;
+        cursor: pointer;
+        background-color: #f0f0f0;
+        border-bottom: 1px solid #ccc;
+        user-select: none;
+      }
+
+      #options-header.opened::before {
+        content: "▼ ";
+      }
+
+      #options-header::before {
+        content: "▶ ";
+      }
+
+      #options-body {
+        padding: 10px 15px;
+        animation: fadeIn 0.3s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Dorico XML Fixer</h1>
+
+    <div id="drop-area">
+      <p>Drag & Drop MusicXML Files Here or Click to Select</p>
+      <input
+        type="file"
+        id="file-input"
+        multiple
+        accept=".xml,.musicxml"
+        hidden
+      />
+      <div id="file-list"></div>
+    </div>
+
+    <div style="margin-bottom: 20px">
+      <label>Output Folder:</label>
+      <input type="text" id="output-path" readonly />
+      <button id="choose-output">Browse</button>
+    </div>
+
+    <div id="options-container">
+      <div id="options-header">Options</div>
+      <div id="options-body" style="display: none">
+        <label
+          ><input type="checkbox" id="select-all" checked /> Select All /
+          Uncheck All</label
+        >
+        <div style="margin-top: 10px; display: grid; gap: 6px">
+          <label
+            ><input
+              type="checkbox"
+              class="option-checkbox"
+              value="clef"
+              checked
+            />
+            Clef Fix</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              class="option-checkbox"
+              value="ghost"
+              checked
+            />
+            Ghost Note Fix</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              class="option-checkbox"
+              value="crash"
+              checked
+            />
+            Crash Notehead Fix</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              class="option-checkbox"
+              value="section"
+              checked
+            />
+            Section Titles Fix</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              class="option-checkbox"
+              value="tempo"
+              checked
+            />
+            Tempo Fix</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              class="option-checkbox"
+              value="swing"
+              checked
+            />
+            Swing Marks Fix</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              class="option-checkbox"
+              value="expressions"
+              checked
+            />
+            Expression Texts Fix</label
+          >
+        </div>
+      </div>
+    </div>
+
+    <button id="process-btn">Fix Files</button>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>
