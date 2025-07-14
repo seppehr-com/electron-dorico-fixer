@@ -13,28 +13,23 @@ jobs:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - name: Fix python path (create symlink for python2)
+      - name: Setup python alias
         run: |
-          if ! [ -e /usr/bin/python ]; then
-            sudo ln -s $(which python3) /usr/bin/python
-          fi
+          mkdir -p $HOME/.local/bin
+          ln -sf $(which python3) $HOME/.local/bin/python
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - name: Install dependencies
-        run: npm install
+      - run: npm install
 
-      - name: Run build
-        run: npm run dist
+      - run: npm run dist
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: mac-build
           path: dist/
