@@ -7,31 +7,43 @@ on:
 
 jobs:
   build:
-    # runs-on: macos-14-arm64
-    runs-on: macos-latest
+    runs-on: macos-14 # یا macos-latest اگر می‌خواهی سریع‌تر باشه
+
     steps:
-      - uses: actions/checkout@v3
+      # 1. دریافت سورس‌کد از مخزن
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Setup python link
-        run: |
-          mkdir -p $HOME/.local/bin
-          ln -sf $(which python3) $HOME/.local/bin/python
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+      # 2. نصب Node.js و npm
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18" # یا نسخه‌ای که پروژه‌ات نیاز دارد
 
+      # 3. نصب Python (اگر نیاز داری مثلاً برای node-gyp)
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      # 4. نصب پکیج‌ها با npm
       - name: Install dependencies
         run: npm install
 
-      - name: Build dist
+      # 5. اجرای build (مطمئن شو که npm script مربوطه تعریف شده باشد)
+      - name: Build distributable
         run: npm run dist
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
-      - name: Upload artifact
+      # 6. آپلود خروجی به عنوان artifact (برای دانلود از خود GitHub Action)
+      - name: Upload .dmg artifact
         uses: actions/upload-artifact@v4
         with:
           name: dorico-fixer-mac
           path: dist/*.dmg
 
+      # 7. انتشار به GitHub Releases
       - name: Publish to GitHub Releases
         uses: softprops/action-gh-release@v1
         with:
