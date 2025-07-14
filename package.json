@@ -10,23 +10,16 @@
     "dist": "electron-builder"
   },
   "build": {
-    "appId": "com.example.doricofixer",
+    "appId": "com.seppehr.doricofixer",
     "productName": "Dorico Fixer",
-    "icon": "build/icon",
     "win": {
       "target": "nsis",
-      "asar": true
-    },
-    "nsis": {
-      "oneClick": true,
-      "perMachine": false,
-      "allowElevation": true,
-      "allowToChangeInstallationDirectory": false
+      "icon": "build/icon.ico"
     }
   },
   "devDependencies": {
     "electron": "^29.0.0",
-    "electron-builder": "^26.0.12",
+    "electron-builder": "^21.2.0",
     "electron-packager": "^17.1.2"
   }
 }
