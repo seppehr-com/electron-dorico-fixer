@@ -18,8 +18,10 @@ jobs:
         with:
           node-version: 18
 
-      - name: Setup python alias
-        run: sudo ln -s /usr/bin/python3 /usr/bin/python || true
+      - name: Set up Python 3
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
 
       - name: Install Dependencies
         run: npm install
@@ -28,6 +30,7 @@ jobs:
         run: npm run dist
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          PYTHON: python3
 
       - name: Upload DMG Artifact
         uses: actions/upload-artifact@v4
