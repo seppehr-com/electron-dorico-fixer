@@ -18,6 +18,9 @@ jobs:
         with:
           node-version: 18
 
+      - name: Setup python alias
+        run: sudo ln -s /usr/bin/python3 /usr/bin/python || true
+
       - name: Install Dependencies
         run: npm install
 
