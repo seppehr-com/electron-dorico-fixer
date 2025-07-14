@@ -6,30 +6,21 @@ on:
       - main
 
 jobs:
-  build-mac:
-    runs-on: macos-latest
-
-    env:
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}
-
+  build:
+    runs-on: macos-14-arm64
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Setup python alias
+      - name: Setup python link
         run: |
           mkdir -p $HOME/.local/bin
           ln -sf $(which python3) $HOME/.local/bin/python
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - run: npm install
+      - name: Install dependencies
+        run: npm install
 
-      - run: npm run dist
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: mac-build
-          path: dist/
+      - name: Build dist
+        run: npm run dist
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
