@@ -24,8 +24,7 @@
     "mac": {
       "target": "dmg",
       "icon": "build/icon.icns",
-      "minimumSystemVersion": "11.0.0",
-      "arch": ["x64", "arm64"]
+      "minimumSystemVersion": "11.0.0"
     }
   },
   "devDependencies": {
