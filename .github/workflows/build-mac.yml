@@ -3,9 +3,10 @@ name: Build Mac
 on:
   push:
     tags:
-      - "v*
+      - "v*"
+    branches:
+      - main
 
-      
 jobs:
   build:
     runs-on: macos-14
