@@ -7,7 +7,7 @@
     "start": "electron .",
     "build": "electron-packager . DoricoFixer --platform=win32 --arch=x64 --icon=assets/icon.ico --overwrite",
     "build-mac": "electron-packager . DoricoFixer --platform=darwin --arch=x64 --overwrite",
-    "dist": "electron-builder -m --x64"
+    "dist": "electron-builder -m --universal"
   },
   "build": {
     "appId": "com.seppehr.doricofixer",
