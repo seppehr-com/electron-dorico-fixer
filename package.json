@@ -17,9 +17,6 @@
       "owner": "seppehr-com",
       "repo": "electron-dorico-fixer"
     },
-    "release": {
-      "publish": "always"
-    },
     "win": {
       "target": "nsis",
       "icon": "build/icon.ico"
