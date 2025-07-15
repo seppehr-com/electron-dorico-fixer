@@ -18,24 +18,30 @@ jobs:
         with:
           node-version: "20.12.2"
 
-      - name: Setup Python
+      - name: Setup Python (for legacy tools)
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
-      - name: Create python symlink (if missing)
+      - name: Configure Python symlink for legacy scripts
         run: |
-          if ! [ -x "$(command -v /usr/bin/python)" ]; then
-            ln -s $(which python3) python || true
+          PYTHON_PATH="$(which python3)"
+          if ! [ -x "/usr/bin/python" ]; then
+            echo "Creating python symlink from $PYTHON_PATH"
+            sudo ln -s "$PYTHON_PATH" /usr/bin/python || echo "Symlink skipped: insufficient permissions"
           fi
 
       - name: Install dependencies
         run: npm install
 
-      - name: Build distributable
+      - name: Fix vulnerabilities (optional but recommended)
+        run: npm audit fix --force
+
+      - name: Build macOS distributable
         run: npm run dist
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          PYTHON: python3
 
       - name: Upload .dmg artifact
         uses: actions/upload-artifact@v4
