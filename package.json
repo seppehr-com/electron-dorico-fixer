@@ -1,6 +1,6 @@
 {
   "name": "electron-dorico-fixer",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Fix MusicXML files using DoricoFixer",
   "main": "main.js",
   "scripts": {
