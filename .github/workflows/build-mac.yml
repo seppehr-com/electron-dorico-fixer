@@ -42,7 +42,7 @@ jobs:
       - name: Build macOS distributable
         run: npm run dist
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
           PYTHON: python3
 
       - name: Upload .dmg artifact
