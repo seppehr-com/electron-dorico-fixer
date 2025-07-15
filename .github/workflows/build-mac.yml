@@ -23,6 +23,12 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Create python symlink (if missing)
+        run: |
+          if ! [ -x "$(command -v /usr/bin/python)" ]; then
+            ln -s $(which python3) python || true
+          fi
+
       - name: Install dependencies
         run: npm install
 
