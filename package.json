@@ -12,6 +12,11 @@
   "build": {
     "appId": "com.seppehr.doricofixer",
     "productName": "Dorico Fixer",
+    "publish": {
+      "provider": "github",
+      "owner": "seppehr-com",
+      "repo": "electron-dorico-fixer"
+    },
     "win": {
       "target": "nsis",
       "icon": "build/icon.ico"
