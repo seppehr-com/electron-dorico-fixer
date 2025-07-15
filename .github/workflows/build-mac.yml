@@ -2,6 +2,10 @@ name: Build Mac
 
 on:
   push:
+    tags:
+      - "v*"
+
+  push:
     branches:
       - main
 
