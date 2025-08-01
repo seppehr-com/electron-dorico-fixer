@@ -24,11 +24,39 @@
     "mac": {
       "target": "dmg",
       "icon": "build/icon.icns"
-    }
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer.js",
+      "index.html",
+      "dorico_ss_fix_lib.js",
+      "assets/**/*",
+      "build/**/*.json",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "asarUnpack": [
+      "build/*.json"
+    ],
+    "extraResources": [
+      {
+        "from": "build/",
+        "to": "build",
+        "filter": [
+          "*.json"
+        ]
+      }
+    ]
   },
   "devDependencies": {
     "electron": "^29.0.0",
-    "electron-builder": "^21.2.0",
+    "electron-builder": "^26.0.12",
     "electron-packager": "^17.1.2"
+  },
+  "dependencies": {
+    "@xmldom/xmldom": "^0.9.8",
+    "fast-xml-parser": "^5.2.5",
+    "vkbeautify": "^0.99.3"
   }
 }

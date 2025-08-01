@@ -1,0 +1,14 @@
+{
+  "p_clef": { "sign": "percussion", "visibility": "no", "run": true },
+  "ghost_note": { "run": true },
+  "crash_notehead": { "notehead_type": "noteheadXOrnate", "run": true },
+  "hihat_notehead": { "run": true },
+  "word_to_rehearsal": { "run": true },
+  "placement_change": { "run": true },
+  "bpm_remover": { "run": true },
+  "midi_fix": { "run": true },
+  "beat_unit_changings_fix": { "run": true },
+  "buzz_roll_fix": { "run": true },
+  "swing_marks_fix": { "run": true },
+  "remove_prevent_new_systems": { "run": true }
+}

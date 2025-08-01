@@ -1,8 +1,31 @@
 // === main.js ===
-const { app, BrowserWindow, ipcMain, dialog } = require("electron");
+const { app, BrowserWindow, ipcMain, dialog, shell } = require("electron");
 const path = require("path");
 const fs = require("fs");
 const doricoFixer = require("./dorico_ss_fix_lib.js");
+
+function loadJSON(filename) {
+  // Primary: inside asar/app bundle
+  const inAsar = path.join(__dirname, "build", filename);
+  if (fs.existsSync(inAsar)) {
+    return require(inAsar);
+  }
+
+  // Fallback: if you unpacked the build folder (e.g., using extraResources)
+  // resourcesPath points to e.g. ".../YourApp/resources"
+  const { app } = require("electron");
+  const resourceBase = process.resourcesPath;
+
+  // If you used extraResources, they appear alongside the asar, not inside it.
+  const external = path.join(resourceBase, "build", filename);
+  if (fs.existsSync(external)) {
+    return JSON.parse(fs.readFileSync(external, "utf-8"));
+  }
+
+  throw new Error(`Could not find ${filename} in expected locations.`);
+}
+const default_instrument_names = loadJSON("instrument_names.json");
+const default_options = loadJSON("default_options.json");
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -43,13 +66,27 @@ ipcMain.handle("select-output-folder", async () => {
 
 // هندل کردن پردازش فایل‌ها
 ipcMain.handle("process-files", async (event, files, outputPath) => {
+  let logText = "";
   for (const file of files) {
     const content = fs.readFileSync(file, "utf-8");
-    const fixed = doricoFixer.fix(content);
+    const [fixed, itemLogText] = await doricoFixer.fix(
+      content,
+      default_options,
+      default_instrument_names
+    );
     const fileName = path.basename(file);
     const outPath = path.join(outputPath, fileName);
     fs.writeFileSync(outPath, fixed, "utf-8");
+
+    // Log the changes
+    logText += `File: ${fileName}\n`;
+    logText += itemLogText ? itemLogText + "\n" : "No changes\n";
   }
+  fs.writeFileSync(path.join(outputPath, "log.txt"), logText, "utf-8");
+
+  // Wait 1 second before opening the output folder
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  shell.openPath(outputPath);
 });
 
 // //Closing web tools

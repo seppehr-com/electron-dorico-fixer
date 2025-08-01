@@ -82,19 +82,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Fix button
-  document.getElementById("process-btn").addEventListener("click", async () => {
-    if (selectedFiles.length === 0) {
-      alert("No files selected.");
-      return;
-    }
-    if (!outputPath) {
-      alert("No output folder selected.");
-      return;
-    }
-    await window.electronAPI.processFiles(selectedFiles, outputPath);
-    alert("All files processed and saved.");
-  });
+  // ...existing code...
 
   //Options
 
@@ -148,7 +136,23 @@ window.addEventListener("DOMContentLoaded", async () => {
       outputPath,
       enabledFixes
     );
-
-    alert("All files processed and saved.");
+    showModal("All files processed and saved.");
   });
+
+  // Modal dialog logic
+  function showModal(message) {
+    const modal = document.getElementById("custom-modal");
+    const msg = document.getElementById("modal-message");
+    const closeBtn = document.getElementById("modal-close");
+    const okBtn = document.getElementById("modal-ok");
+    msg.textContent = message;
+    modal.style.display = "flex";
+    function closeModal() {
+      modal.style.display = "none";
+      closeBtn.removeEventListener("click", closeModal);
+      okBtn.removeEventListener("click", closeModal);
+    }
+    closeBtn.addEventListener("click", closeModal);
+    okBtn.addEventListener("click", closeModal);
+  }
 });

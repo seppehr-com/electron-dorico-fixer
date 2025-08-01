@@ -1,0 +1,90 @@
+{
+  "snare_drum": {
+    "names": ["Snare Drum", "Snare", "Snare Drum I", "Snare Drum II"],
+    "id": 39
+  },
+  "bass_drum": {
+    "names": ["Kick Drum I"],
+    "id": 37
+  },
+  "cross_stick": {
+    "names": ["Cross Stick", "%cross%stick%"],
+    "id": 38
+  },
+  "normal_crash_cymbal": {
+    "names": ["Crash Cymbal I", "Crash Cymbal", "%Crash%Cymbal%", "Crash"],
+    "id": 50
+  },
+  "choked_crash_cymbal": {
+    "names": ["Crash Cymbal II", "%Choked%Crash%"],
+    "id": 50
+  },
+  "cowbell": {
+    "names": ["Cowbell"],
+    "id": 57
+  },
+  "kick_drum": {
+    "names": ["Kick Drum II", "Kick Drum", "Double Bass"],
+    "id": 36
+  },
+  "hi_hat_open": {
+    "names": ["Hi-hat Open", "%open%hi-hat%"],
+    "id": 47
+  },
+  "hi_hat_closed": {
+    "names": ["Hi-hat Closed", "%closed%hi-hat%"],
+    "id": 43
+  },
+  "hi_hat_pedal_closed": {
+    "names": ["Hi-hat (pedal closed)", "%pedal%closed%hi-hat%"],
+    "id": 45
+  },
+  "hi_hat_pedal_splash": {
+    "names": ["Hi-hat (pedal splash)", "%pedal%splash%hi-hat%"],
+    "id": 47
+  },
+  "china_cymbal": {
+    "names": ["China Cymbal", "%china%"],
+    "id": 53
+  },
+  "ride_cymbal": {
+    "names": ["Ride Cymbal", "%ride%cymbal%"],
+    "id": 52
+  },
+  "ride_bell": {
+    "names": ["Ride Bell", "%ride%bell%"],
+    "id": 54
+  },
+  "splash_cymbal": {
+    "names": ["Splash Cymbal", "%splash%cymbal%"],
+    "id": 56
+  },
+  "ghost_snare_drum": {
+    "names": ["Ghost Snare Drum", "%ghost%snare%"],
+    "id": 38
+  },
+  "tom-tom-i": {
+    "names": ["Tom-tom I", "%high%tom%"],
+    "id": 51
+  },
+  "tom-tom-ii": {
+    "names": ["Tom-tom II", "%high%mid%tom%"],
+    "id": 49
+  },
+  "tom-tom-iii": {
+    "names": ["Tom-tom III", "%mid%tom%"],
+    "id": 48
+  },
+  "tom-tom-iv": {
+    "names": ["Tom-tom IV", "%low%tom%"],
+    "id": 46
+  },
+  "floor_tom_i": {
+    "names": ["Floor Tom I", "%floor%tom%", "%floor%tom%1%"],
+    "id": 44
+  },
+  "floor_tom_ii": {
+    "names": ["Floor Tom II", "%floor%tom%2%", "%second%floor%tom%"],
+    "id": 42
+  }
+}
